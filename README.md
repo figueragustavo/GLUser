@@ -35,7 +35,7 @@ mvn spring-boot:run
 # Swagger
 Swagger está configurado para permitir la autenticación Bearer. Puedes acceder a la documentación de la API en:
 
-http://localhost:8080/swagger-ui.html
+http://{host}:{port}/swagger-ui.html
 
 Seguridad
 La configuración de seguridad permite el acceso sin autenticación a Swagger y requiere autenticación para otros endpoints.
@@ -75,7 +75,7 @@ Authorization: Bearer {token}
 
 # Consola H2
 
-Url: http://localhost:8080/h2-console
+Url: http://{host}:{port})/h2-console
 
 
 
