@@ -2,12 +2,16 @@ package com.global.users.exception;
 
 import com.global.users.enums.ExceptionCodes;
 
-public class EmailExistsException extends CustomException{
+import lombok.Getter;
+
+@Getter
+public class EmailExistsException extends Exception{
 
 	private static final long serialVersionUID = 1L;
-	private static final ExceptionCodes exceptionCode = ExceptionCodes.EMAIL_USER_ALREADY_EXIST;
+	private ExceptionCodes exceptionCode;
 
 	public EmailExistsException() {
-		super(exceptionCode.getCode(), exceptionCode.getUserMessage(), exceptionCode.getSystemMessage());
+		super();
+		exceptionCode = ExceptionCodes.EMAIL_USER_ALREADY_EXIST;
 	}
 }

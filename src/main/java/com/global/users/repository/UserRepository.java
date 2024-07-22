@@ -1,4 +1,4 @@
-package com.global.users.DAO;
+package com.global.users.repository;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.global.users.entity.User;
 
 @Repository
-public interface UserDAO extends JpaRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<User, UUID> {
 	
 	@Transactional
 	@Modifying

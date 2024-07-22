@@ -1,10 +1,10 @@
-package com.global.users;
+package com.globallogic.userglapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UsersApplicationTests {
+class UserglapiApplicationTests {
 
 	@Test
 	void contextLoads() {

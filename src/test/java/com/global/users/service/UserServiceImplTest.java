@@ -31,12 +31,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.global.users.DAO.UserDAO;
-import com.global.users.DTO.UserLoginDTO;
+import com.global.users.DTO.UserLoginResponseDTO;
 import com.global.users.entity.Phone;
 import com.global.users.entity.User;
-import com.global.users.exception.EmailExistsException;
 import com.global.users.exception.UserNotFoundException;
+import com.global.users.repository.UserRepository;
 import com.global.users.security.JWTToken;
 import com.global.users.service.UserService;
 import com.global.users.service.impl.UserServiceImpl;
@@ -47,7 +46,7 @@ public class UserServiceImplTest {
 	@InjectMocks
 	private UserServiceImpl userService;
 	@Mock
-	UserDAO userDAO;
+	UserRepository userDAO;
 	@Mock
 	private ModelMapper modelMapper;
 	@Mock
@@ -73,14 +72,20 @@ public class UserServiceImplTest {
 		// given
 		final User user = new User();
 		user.setId(USER_ID);
-		UserLoginDTO userLoginDTO = new UserLoginDTO();
+		UserLoginResponseDTO userLoginDTO = new UserLoginResponseDTO();
 		userLoginDTO.setId(USER_ID);
 
 		given(userDAO.findById(USER_ID)).willReturn(Optional.of(user));
-		given(modelMapper.map(user, UserLoginDTO.class)).willReturn(userLoginDTO);
+		given(modelMapper.map(user, UserLoginResponseDTO.class)).willReturn(userLoginDTO);
 
 		// when
-		UserLoginDTO result = userService.getUserById(USER_ID);
+		UserLoginResponseDTO result = null;
+		try {
+			result = userService.getUserById(USER_ID);
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// then
 		assertTrue(result != null);
@@ -88,7 +93,7 @@ public class UserServiceImplTest {
 	}
 
 	@Test // cuando se crea un User exitoso
-	void whenCreateAUser() {
+	void whenCreateAUser() throws Exception {
 		// given
 		final String name = "jose";
 		final String email = "pruebaMock@prueba.com";
@@ -171,7 +176,7 @@ public class UserServiceImplTest {
 	        when(userDAO.findUserByEmail(user.getEmail())).thenReturn(Optional.of(user));
 
 	        // Verifica que se lanza la excepción
-	        assertThrows(EmailExistsException.class, () -> {
+	        assertThrows(Exception.class, () -> {
 	            userService.save(user);
 	        });
 

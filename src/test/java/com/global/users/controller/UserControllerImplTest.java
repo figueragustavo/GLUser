@@ -23,9 +23,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.global.users.DTO.PhoneDTO;
-import com.global.users.DTO.UserLoginDTO;
+import com.global.users.DTO.UserLoginResponseDTO;
 import com.global.users.DTO.UserRequestDTO;
 import com.global.users.DTO.UserResponseDTO;
+import com.global.users.controller.impl.UserControllerImpl;
 import com.global.users.entity.Phone;
 import com.global.users.entity.User;
 import com.global.users.exception.EmailExistsException;
@@ -37,8 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@WebMvcTest(UserController.class)
-public class UserControllerTest {
+@WebMvcTest(UserControllerImpl.class)
+public class UserControllerImplTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -56,9 +57,9 @@ public class UserControllerTest {
 
 		final List<PhoneDTO> phones = new ArrayList<>();
 		PhoneDTO phone = new PhoneDTO();
-		phone.setNumber(1234L);
-		phone.setCityCode(123);
-		phone.setCountryCode("ARG");
+		phone.setNumber("1234");
+		phone.setCityCode("123");
+		phone.setCountryCode("549");
 		phones.add(phone);
 
 		UserRequestDTO userRequestDTO = new UserRequestDTO();
@@ -89,9 +90,9 @@ public class UserControllerTest {
 		UUID userId = UUID.fromString("e6ace60e-61f6-4994-9f8e-f3f082a32766");
 		final List<PhoneDTO> phones = new ArrayList<>();
 		PhoneDTO phone = new PhoneDTO();
-		phone.setNumber(1234L);
-		phone.setCityCode(123);
-		phone.setCountryCode("ARG");
+		phone.setNumber("1234");
+		phone.setCityCode("123");
+		phone.setCountryCode("549");
 		phones.add(phone);
 
 		UserRequestDTO userRequestDTO = new UserRequestDTO();
@@ -105,7 +106,7 @@ public class UserControllerTest {
 		newUser.setEmail("prueba@prueba.com");
 		newUser.setPassword("P433word");
 		
-		UserLoginDTO userLoginDTO = new UserLoginDTO();
+		UserLoginResponseDTO userLoginDTO = new UserLoginResponseDTO();
 		userLoginDTO.setName("jose");
 		userLoginDTO.setEmail("prueba@prueba.com");
 		userLoginDTO.setPassword("Pa33word");

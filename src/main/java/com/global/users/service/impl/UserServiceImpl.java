@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.global.users.DAO.UserDAO;
-import com.global.users.DTO.UserLoginDTO;
+import com.global.users.DTO.UserLoginResponseDTO;
 import com.global.users.entity.User;
 import com.global.users.exception.EmailExistsException;
 import com.global.users.exception.UserNotFoundException;
+import com.global.users.repository.UserRepository;
 import com.global.users.security.JWTToken;
 import com.global.users.service.UserService;
 
@@ -23,14 +23,14 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private ModelMapper modelMapper;
 	@Autowired
-	private UserDAO userDAO;
+	private UserRepository userDAO;
 	@Autowired
 	private JWTToken jwtToken;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Override
-	public User save(User user) {
+	public User save(User user) throws Exception {
 	
 		this.existsEmail(user);
 		user.setCreated(LocalDateTime.now());
@@ -45,14 +45,14 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public UserLoginDTO getUserById(UUID id) {
+	public UserLoginResponseDTO getUserById(UUID id) throws UserNotFoundException {
 		Optional<User> userOpt = userDAO.findById(id);
 		User user = null;
 		this.isPresentUser(userOpt);
 		user = userOpt.get();
 		user.setLastLogin(LocalDateTime.now());
 		
-		return modelMapper.map(user, UserLoginDTO.class);
+		return modelMapper.map(user, UserLoginResponseDTO.class);
 	}
 	
 	public String generateTokenById(UUID id) {
@@ -61,13 +61,13 @@ public class UserServiceImpl implements UserService{
 		return token;
 	}
 
-	private void existsEmail(User user) {
+	private void existsEmail(User user) throws EmailExistsException {
 		if (userDAO.findUserByEmail(user.getEmail()).isPresent()) {
 			throw new EmailExistsException();
 		}
 	}
 	
-	private void isPresentUser(Optional<User> user) {
+	private void isPresentUser(Optional<User> user) throws UserNotFoundException {
 		if (!user.isPresent()) {
 			throw new UserNotFoundException();
 		}
