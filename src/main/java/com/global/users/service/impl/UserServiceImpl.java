@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private ModelMapper modelMapper;
 	@Autowired
-	private UserRepository userDAO;
+	private UserRepository userRepository;
 	@Autowired
 	private JWTToken jwtToken;
 	@Autowired
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
 		user.setLastLogin(null);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-		User newUser = this.userDAO.save(user);
+		User newUser = this.userRepository.save(user);
 		newUser.setToken(this.generateTokenById(newUser.getId()));
 
 		return newUser;
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserLoginResponseDTO getUserById(UUID id) throws UserNotFoundException {
-		Optional<User> userOpt = userDAO.findById(id);
+		Optional<User> userOpt = userRepository.findById(id);
 		User user = null;
 		this.isPresentUser(userOpt);
 		user = userOpt.get();
@@ -57,12 +57,12 @@ public class UserServiceImpl implements UserService{
 	
 	public String generateTokenById(UUID id) {
 		String token = jwtToken.getJWTToken(id);
-		userDAO.updateTokenById(token, id);
+		userRepository.updateTokenById(token, id);
 		return token;
 	}
 
 	private void existsEmail(User user) throws EmailExistsException {
-		if (userDAO.findUserByEmail(user.getEmail()).isPresent()) {
+		if (userRepository.findUserByEmail(user.getEmail()).isPresent()) {
 			throw new EmailExistsException();
 		}
 	}

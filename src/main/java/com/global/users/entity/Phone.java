@@ -1,6 +1,5 @@
 package com.global.users.entity;
 
-
 import java.util.UUID;
 
 import javax.persistence.CascadeType;

@@ -1,0 +1,23 @@
+# Conversion to YAML from Properties formar report
+# Warnings:
+# - The yaml file had comments which are lost in the refactoring!
+spring:
+  application:
+    name: userglapi
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MYSQL
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+user:
+  password:
+    regex: ^(?=.*[A-Z]{1})(?=.*[0-9]{2})(?=.*[a-z]).{8,12}$

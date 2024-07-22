@@ -21,10 +21,9 @@ import com.global.users.DTO.UserRequestDTO;
 import com.global.users.DTO.UserResponseDTO;
 import com.global.users.controller.UserController;
 import com.global.users.entity.User;
-import com.global.users.exception.EmailExistsException;
 import com.global.users.exception.UserNotFoundException;
 import com.global.users.service.UserService;
-//import com.global.users.util.PasswordValidator;
+import com.global.users.util.PasswordValidator;
 
 import lombok.AllArgsConstructor;
 
@@ -36,15 +35,15 @@ public class UserControllerImpl implements UserController{
 	@Autowired
 	private UserService service;
 	
-//	@Autowired
-//    private PasswordValidator passwordValidator;
+	@Autowired
+    private PasswordValidator passwordValidator;
 	
 	private ModelMapper modelMapper;
 	
 	
 	@PostMapping("/sign-up")
 	public ResponseEntity<?> create(@Valid @RequestBody UserRequestDTO userRequestDTO) throws Exception {
-//		passwordValidator.validatePassword(userRequestDTO.getPassword());
+		passwordValidator.validatePassword(userRequestDTO.getPassword());
 		return new ResponseEntity<UserResponseDTO>(this.createUser(userRequestDTO), HttpStatus.CREATED);
 	}
 

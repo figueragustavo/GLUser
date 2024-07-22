@@ -57,7 +57,7 @@ public class ExceptionHandlerController {
 		 return new ResponseEntity<>(ResponseError.builder()
 				 .code(String.valueOf(ex.getExceptionCode().getCode()))
 				 .description(ex.getExceptionCode().getUserMessage())
-				 .build(), HttpStatus.FOUND);
+				 .build(), HttpStatus.BAD_REQUEST);
 	  }
 //	 @ExceptionHandler(SignatureException.class)
 //	 public ResponseEntity<ResponseError> handlePersonNotFound(SignatureException e) {
