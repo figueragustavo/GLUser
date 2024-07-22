@@ -15,7 +15,7 @@ Swagger: Documentación de la API.
 H2 Database: Base de datos en memoria para desarrollo.
 Instalación
 Requisitos
-Java 8 o superior
+Java 11 o superior
 Maven
 Configuración del Proyecto
 Clonar el repositorio:
@@ -32,7 +32,7 @@ Ejecutar la aplicación:
 bash
 mvn spring-boot:run
 
-Swagger
+# Swagger
 Swagger está configurado para permitir la autenticación Bearer. Puedes acceder a la documentación de la API en:
 
 http://localhost:8080/swagger-ui.html
@@ -40,9 +40,9 @@ http://localhost:8080/swagger-ui.html
 Seguridad
 La configuración de seguridad permite el acceso sin autenticación a Swagger y requiere autenticación para otros endpoints.
 
-Realizar pruebas (POSTMAN)
+# Realizar pruebas (POSTMAN)
 Endpoints
-Registro de Usuario
+# Registro de Usuario
 POST /api/v1/user/sign-up
 
 Descripción: Crea un nuevo usuario.
@@ -64,7 +64,7 @@ json
   ]
 }
 
-Inicio de Sesión
+# Inicio de Sesión
 GET /api/users/login
 
 Descripción: Obtiene información del usuario autenticado.
@@ -72,4 +72,10 @@ Descripción: Obtiene información del usuario autenticado.
 Headers:
 
 Authorization: Bearer {token}
+
+# Consola H2
+
+Url: http://localhost:8080/h2-console
+
+
 
