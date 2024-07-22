@@ -41,6 +41,9 @@ Seguridad
 La configuración de seguridad permite el acceso sin autenticación a Swagger y requiere autenticación para otros endpoints.
 
 # Realizar pruebas (POSTMAN)
+
+Collection Postman: https://github.com/figueragustavo/GLUser/blob/main/UserGlobal.postman_collection.json
+
 Endpoints
 # Registro de Usuario
 POST /api/v1/user/sign-up
