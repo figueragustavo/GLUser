@@ -20,4 +20,4 @@ spring:
       matching-strategy: ant-path-matcher
 user:
   password:
-    regex: ^(?=.*[A-Z]{1})(?=.*[0-9]{2})(?=.*[a-z]).{8,12}$
+      regex: ^(?=.*[A-Z]{1})(?=.*[0-9]{2})(?=.*[a-z]).{8,12}$

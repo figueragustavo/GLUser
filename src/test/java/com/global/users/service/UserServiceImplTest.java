@@ -40,7 +40,7 @@ import com.global.users.security.JWTToken;
 import com.global.users.service.UserService;
 import com.global.users.service.impl.UserServiceImpl;
 
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
 
 	@InjectMocks

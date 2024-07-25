@@ -53,7 +53,7 @@ public class UserControllerImpl implements UserController{
 		return new ResponseEntity<UserLoginResponseDTO>(this.getUserById(id), HttpStatus.OK);
 	}
 	
-	private UserResponseDTO createUser(UserRequestDTO userRequestDTO) throws Exception {
+	public UserResponseDTO createUser(UserRequestDTO userRequestDTO) throws Exception {
 		User newUser = this.service.save(this.modelMapper.map(userRequestDTO, User.class));
 		return this.modelMapper.map(newUser, UserResponseDTO.class);
 	}

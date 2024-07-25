@@ -55,19 +55,19 @@ public class UserServiceImpl implements UserService{
 		return modelMapper.map(user, UserLoginResponseDTO.class);
 	}
 	
-	public String generateTokenById(UUID id) {
+	protected String generateTokenById(UUID id) {
 		String token = jwtToken.getJWTToken(id);
 		userRepository.updateTokenById(token, id);
 		return token;
 	}
 
-	private void existsEmail(User user) throws EmailExistsException {
+	public void existsEmail(User user) throws EmailExistsException {
 		if (userRepository.findUserByEmail(user.getEmail()).isPresent()) {
 			throw new EmailExistsException();
 		}
 	}
 	
-	private void isPresentUser(Optional<User> user) throws UserNotFoundException {
+	public void isPresentUser(Optional<User> user) throws UserNotFoundException {
 		if (!user.isPresent()) {
 			throw new UserNotFoundException();
 		}
