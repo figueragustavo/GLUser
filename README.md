@@ -42,7 +42,7 @@ La configuración de seguridad permite el acceso sin autenticación a Swagger y 
 
 # Realizar pruebas (POSTMAN)
 
-Collection Postman: https://github.com/figueragustavo/GLUser/blob/main/UserGlobal.postman_collection.json
+Collection Postman: https://github.com/figueragustavo/GLUser/blob/main/Collection%20Postman/UserGlobal.postman_collection.json
 
 Endpoints
 # Registro de Usuario
