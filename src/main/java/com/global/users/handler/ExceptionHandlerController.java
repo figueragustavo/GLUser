@@ -1,5 +1,7 @@
 package com.global.users.handler;
 
+import java.time.LocalDateTime;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,7 +25,7 @@ public class ExceptionHandlerController {
 	 public ResponseEntity<ResponseError> handleError(Exception ex) {
 		 ex.printStackTrace();
 		 log.error(ex.getMessage());
-		 return new ResponseEntity<>(ResponseError.builder().code("500").description(ex.getMessage()).build(), HttpStatus.INTERNAL_SERVER_ERROR);
+		 return new ResponseEntity<>(ResponseError.builder().code("500").description(ex.getMessage()).timestamp(LocalDateTime.now()).build(), HttpStatus.INTERNAL_SERVER_ERROR);
 	 }
 	 
 	 @ExceptionHandler(EmailExistsException.class)
@@ -32,6 +34,7 @@ public class ExceptionHandlerController {
 		 return new ResponseEntity<>(ResponseError.builder()
 				 .code(String.valueOf(ex.getExceptionCode().getCode()))
 				 .description(ex.getExceptionCode().getUserMessage())
+				 .timestamp(LocalDateTime.now())
 				 .build(), HttpStatus.FOUND);
 	  }
 	 @ExceptionHandler(UserNotFoundException.class)
@@ -40,6 +43,7 @@ public class ExceptionHandlerController {
 		 return new ResponseEntity<>(ResponseError.builder()
 				 .code(String.valueOf(ex.getExceptionCode().getCode()))
 				 .description(ex.getExceptionCode().getUserMessage())
+				 .timestamp(LocalDateTime.now())
 				 .build(), HttpStatus.NOT_FOUND);
 	 }
 	 @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -49,6 +53,7 @@ public class ExceptionHandlerController {
 		 return new ResponseEntity<>(ResponseError.builder()
 				 .code(String.valueOf(ex.getCode()))
 				 .description(ex.getUserMessage())
+				 .timestamp(LocalDateTime.now())
 				 .build(), HttpStatus.BAD_REQUEST);
 	 }
 	 @ExceptionHandler(PassworNotValidException.class)
@@ -57,16 +62,8 @@ public class ExceptionHandlerController {
 		 return new ResponseEntity<>(ResponseError.builder()
 				 .code(String.valueOf(ex.getExceptionCode().getCode()))
 				 .description(ex.getExceptionCode().getUserMessage())
+				 .timestamp(LocalDateTime.now())
 				 .build(), HttpStatus.BAD_REQUEST);
 	  }
-//	 @ExceptionHandler(SignatureException.class)
-//	 public ResponseEntity<ResponseError> handlePersonNotFound(SignatureException e) {
-//		 ExceptionCodes ex = ExceptionCodes.INVALID_TOKEN;
-//		 log.error(ex.getCode()+"--"+ex.getUserMessage());
-//		 return new ResponseEntity<>(ResponseError.builder()
-//				 .code(String.valueOf(ex.getCode()))
-//				 .description(ex.getUserMessage())
-//				 .build(), HttpStatus.UNAUTHORIZED);
-//	 }
 
 }

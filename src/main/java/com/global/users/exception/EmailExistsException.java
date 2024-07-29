@@ -8,7 +8,7 @@ import lombok.Getter;
 public class EmailExistsException extends Exception{
 
 	private static final long serialVersionUID = 1L;
-	private ExceptionCodes exceptionCode;
+	private final ExceptionCodes exceptionCode;
 
 	public EmailExistsException() {
 		super();

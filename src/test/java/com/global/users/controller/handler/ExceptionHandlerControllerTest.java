@@ -2,8 +2,6 @@ package com.global.users.controller.handler;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.context.WebApplicationContext;
 
 import com.global.users.DTO.ResponseError;
 import com.global.users.enums.ExceptionCodes;
@@ -44,7 +41,7 @@ public class ExceptionHandlerControllerTest {
     }
 
     @Test
-    public void testHandleError() throws Exception {
+    void testHandleError() {
         Exception exception = new Exception("Test Exception");
         ResponseEntity<ResponseError> response = exceptionHandlerController.handleError(exception);
 
@@ -54,7 +51,7 @@ public class ExceptionHandlerControllerTest {
     }
 
     @Test
-    public void testHandleEmailExistsException() throws Exception {
+    void testHandleEmailExistsException() {
         EmailExistsException exception = mock(EmailExistsException.class);
         when(exception.getExceptionCode()).thenReturn(ExceptionCodes.EMAIL_USER_ALREADY_EXIST);
 
@@ -66,7 +63,7 @@ public class ExceptionHandlerControllerTest {
     }
 
     @Test
-    public void testHandleUserNotFoundException() throws Exception {
+    void testHandleUserNotFoundException() {
         UserNotFoundException exception = mock(UserNotFoundException.class);
         when(exception.getExceptionCode()).thenReturn(ExceptionCodes.USER_NOT_FOUND);
 
@@ -78,7 +75,7 @@ public class ExceptionHandlerControllerTest {
     }
 
     @Test
-    public void testEmailFormatException() throws Exception {
+    void testEmailFormatException() {
         MethodArgumentNotValidException exception = mock(MethodArgumentNotValidException.class);
         ExceptionCodes exCode = ExceptionCodes.EMAIL_FORMAT_EXCEPTION;
 
@@ -90,7 +87,7 @@ public class ExceptionHandlerControllerTest {
     }
 
     @Test
-    public void testPassFormatException() throws Exception {
+    void testPassFormatException(){
         PassworNotValidException exception = mock(PassworNotValidException.class);
         when(exception.getExceptionCode()).thenReturn(ExceptionCodes.PASSWORD_FORMAT_EXCEPTION);
 
